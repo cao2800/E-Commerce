@@ -2,6 +2,7 @@ package com.ecommerce.Model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Address {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="AddressID")
 	private int addressId;
 	
 	@ManyToOne
@@ -34,9 +36,9 @@ public class Address {
 	private String unit;
 	private String city;
 	private String state;
-	private int zipCode;
+	private int zipcode;
 	private String country;
-	private String phoneNo;
+	private String phone;
 	
 	@OneToMany(mappedBy= "address")
 	private List<Orders> orders;

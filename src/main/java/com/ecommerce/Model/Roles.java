@@ -1,6 +1,7 @@
 package com.ecommerce.Model;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,7 +22,10 @@ public class Roles {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="RoleID")
 	private int roleId;
+	
+	@Column(name="rolename")
 	private String roleName;
 	
 	@OneToMany(mappedBy= "roles")

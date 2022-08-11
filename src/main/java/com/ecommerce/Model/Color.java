@@ -2,6 +2,7 @@ package com.ecommerce.Model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,10 @@ public class Color {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="ColorID")
 	private int colorId;
+	
+	@Column(name="colorname")
 	private String colorName;
 	
 	@OneToMany(mappedBy= "color")

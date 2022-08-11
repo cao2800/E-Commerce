@@ -2,6 +2,7 @@ package com.ecommerce.Model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,10 +23,12 @@ public class ProductCategory {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="CategoryID")
 	private int categoryId;
 	
+	@Column(name="categoryname")
 	private String categoryName;
 	
-	@OneToMany(mappedBy= "productcategory")
+	@OneToMany(mappedBy= "productCategory")
 	private List<Product> product;
 }

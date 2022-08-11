@@ -1,5 +1,6 @@
 package com.ecommerce.Model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,15 +22,21 @@ public class Orders {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="OrderID")
 	private int orderId;
 	
 	@ManyToOne
 	@JoinColumn(name="ProductID")
 	private Product product;
 	
-	private String orderNumber;
-	private double totalPrice;
-	private int totalQuantity;
+	@Column(name="ordernumber")
+	private String ordernumber;
+	
+	@Column(name="totalprice")
+	private double totalprice;
+	
+	@Column(name="totalquantity")
+	private int totalquantity;
 	
 	@ManyToOne
 	@JoinColumn(name="UserID")
@@ -39,5 +46,6 @@ public class Orders {
 	@JoinColumn(name="AddressID")
 	private Address address;
 	
-	private String orderStatus;
+	@Column(name="orderstatus")
+	private String orderstatus;
 }
