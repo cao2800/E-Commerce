@@ -1,12 +1,18 @@
-package com.ecommerce.Model;
+package com.ecommerce.model;
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -37,8 +43,11 @@ public class User {
 	private String phone;
 	private String permissions;
 	
-	@OneToMany(mappedBy= "user")
-	private List<UserRoles> userRoles;
+	@ManyToMany(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name="userroles", 
+	joinColumns = @JoinColumn(name = "UserID", referencedColumnName="UserID"),
+	inverseJoinColumns = @JoinColumn(name="RoleID", referencedColumnName="RoleID"))
+	private Set<Roles> roles;
 	
 	@OneToMany(mappedBy= "user")
 	private List<Payment> payment;
@@ -48,4 +57,13 @@ public class User {
 	
 	@OneToMany(mappedBy= "user")
 	private List<Orders> orders;
+	
+	public User(String email, String password, String firstName, String lastName, String phone, String permissions) {
+		this.email = email;
+		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+		this.permissions = permissions;
+	}
 }

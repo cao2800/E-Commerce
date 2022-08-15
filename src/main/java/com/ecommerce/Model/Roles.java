@@ -1,4 +1,4 @@
-package com.ecommerce.Model;
+package com.ecommerce.model;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -28,6 +28,6 @@ public class Roles {
 	@Column(name="rolename")
 	private String roleName;
 	
-	@OneToMany(mappedBy= "roles")
-	private List<UserRoles> userRoles;
+//	@OneToMany(mappedBy= "roles")
+//	private List<UserRoles> userRoles;
 }
