@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.ecommerce.common.UserConstant;
 import com.ecommerce.service.CustomUserDetailsService;
 
 
@@ -20,6 +21,8 @@ import com.ecommerce.service.CustomUserDetailsService;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 public class EcommerceConfig extends WebSecurityConfigurerAdapter{
+	
+	UserConstant constant;
 	
 	@Autowired
 	private CustomUserDetailsService userDetailsService;
@@ -32,6 +35,7 @@ public class EcommerceConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	
 	}
 	
 	@Override
@@ -40,6 +44,7 @@ public class EcommerceConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 			.antMatchers(HttpMethod.GET, "/api/**").permitAll()
 			.antMatchers("/api/auth/**").permitAll()
+			.antMatchers("/admin/**").hasRole("ADMIN")
 			.anyRequest()
 			.authenticated()
 			.and()

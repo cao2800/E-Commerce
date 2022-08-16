@@ -49,6 +49,7 @@ public class User {
 	inverseJoinColumns = @JoinColumn(name="RoleID", referencedColumnName="RoleID"))
 	private Set<Roles> roles;
 	
+	
 	@OneToMany(mappedBy= "user")
 	private List<Payment> payment;
 	
