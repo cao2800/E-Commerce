@@ -1,8 +1,5 @@
 package com.ecommerce.model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -34,14 +31,7 @@ public class ProductCategory {
 	@Column(name="categoryname")
 	private String categoryName;
 	
-	@OneToMany(fetch = FetchType.EAGER,  mappedBy= "productCategory", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY,  mappedBy= "productCategory", cascade = CascadeType.ALL)
 	private Set<Product> productSet;
-//	
-//	public void addProduct(Product product) {
-//		if(productSet == null) {
-//			productSet = new HashSet<>();
-//		}
-//		product.productCategory = this;
-//		productSet.add(product);
-//	}
+
 }

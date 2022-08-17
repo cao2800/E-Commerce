@@ -50,6 +50,9 @@ public class UserController {
 	private UserRepository userRepository;
 	
 	@Autowired
+	private ProductRepository productRepository;
+	
+	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 
@@ -57,7 +60,7 @@ public class UserController {
 	public ResponseEntity<?> registerUser(@RequestBody RegisterDto registerDto) {
 		
 		//check if email is already registered
-		if(userRepository.existsByEmail(registerDto.getEmail())) {
+		if(Boolean.TRUE.equals(userRepository.existsByEmail(registerDto.getEmail()))) {
 			return new ResponseEntity<>("Email is already registered", HttpStatus.BAD_REQUEST);
 		}
 		
@@ -92,6 +95,12 @@ public class UserController {
 		return userRepository.findAll();
 	}
 	
+	@GetMapping("/admin/loadProducts")
+	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	public List<Product> loadProducts() {
+		return productRepository.findAll();
+	}
+	
 	@PostMapping("/admin/addProduct")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	public void addProduct(@RequestBody Product product) {
@@ -108,9 +117,9 @@ public class UserController {
 		productService.addProduct(product);
 	}
 	
-	@DeleteMapping("/admin/deleteProduct/{prodId}")
+	@DeleteMapping("/admin/deleteProduct/{ProductID}")
 	@PreAuthorize("hasAuthority('ROLE_ADMIN')")
-	public void deleteProduct(@PathVariable Integer prodId) {
+	public void deleteProduct(@PathVariable("ProductID") Integer prodId) {
 		productService.deleteProduct(prodId);
 	}
 	
